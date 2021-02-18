@@ -23,15 +23,15 @@ Extracting geometric features from 3D scans or point clouds is the first step in
 
 ### Related Works
 
-3DMatch by Zeng et al. uses a siamese convolutional network to learn 3D patch descriptors.
+3DMatch by Zeng et al. uses a Siamese convolutional network to learn 3D patch descriptors.
 CGF by Khoury et al. maps 3D oriented histograms to a low-dimensional feature space using multi-layer perceptrons. PPFNet and PPF FoldNet by Deng et al. adapts the PointNet architecture for geometric feature description. 3DFeat by Yew and Lee uses a PointNet to extract features in outdoor scenes.
 
 Our work addressed a number of limitations in the prior work. First, all prior approaches extract a small 3D patch or a set of points and map it to a low-dimensional space. This not only limits the receptive field of the network but is also computationally inefficient since all intermediate representations are computed separately even for overlapping 3D regions. Second, using expensive low-level geometric signatures as input can slow down feature computation. Lastly, limiting feature extraction to a subset of interest points results in lower spatial resolution for subsequent matching stages and can thus reduce registration accuracy.
 
 
-### Fully Convolutional Metric Learning  and Hardest Contrastive, Hardest Triplet Loss
+### Fully Convolutional Metric Learning, Hardest Contrastive, and Hardest Triplet Loss
 
-Traditional metric learning assumes that the features are independent and identically distributed (i.i.d.) since a batch is constructed by random sampling. However, in fully-convolutional feature extraction first proposed in Universal Correspondence Network, Choy 2016, adjacent features are locally correlated and hard-negative mining could find features adjacent to anchors, which are false negatives. Thus, filtering out these false negatives is a crucial step similar to how Universal Correspondence Network by Choy et al. used a distance threshold to filter out the false negatives.
+Traditional metric learning assumes that the features are independent and identically distributed (i.i.d.) since a batch is constructed by random sampling. However, in fully-convolutional metric learning first proposed in [Universal Correspondence Network, Choy 2016](https://github.com/chrischoy/open-ucn), adjacent features are locally correlated and hard-negative mining could find features adjacent to anchors, which are false negatives. Thus, filtering out these false negatives is a crucial step similar to how Universal Correspondence Network used a distance threshold to filter out the false negatives.
 
 Also, the number of features used in the fully-convolutional setting is orders of magnitude larger than that in standard metric learning algorithms. For instance, FCGF generates ~40k features for a pair of scans (this increases proportionally with the batch size) while a minibatch in traditional metric learning has around 1k features. Thus, it is not feasible to use all pairwise distances within a batch in the standard metric learning.
 
@@ -67,9 +67,9 @@ Please follow the link [Youtube Video](https://www.youtube.com/watch?v=d0p0eTaB5
 ## Requirements
 
 - Ubuntu 14.04 or higher
-- CUDA 10.2 or higher
+- CUDA 11.1 or higher
 - Python v3.7 or higher
-- Pytorch v1.5 or higher
+- Pytorch v1.6 or higher
 - [MinkowskiEngine](https://github.com/stanfordvl/MinkowskiEngine) v0.5 or higher
 
 
