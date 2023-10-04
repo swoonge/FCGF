@@ -127,7 +127,7 @@ class AlignmentTrainer:
         self.writer.add_scalar(f'val/{k}', v, 0)
 
     for epoch in range(self.start_epoch, self.max_epoch + 1):
-      lr = self.scheduler.get_lr()
+      lr = self.scheduler.get_last_lr()
       logging.info(f" Epoch: {epoch}, LR: {lr}")
       self._train_epoch(epoch)
       self._save_checkpoint(epoch)
@@ -228,7 +228,7 @@ class ContrastiveLossTrainer(AlignmentTrainer):
       for iter_idx in range(iter_size):
         # Caffe iter size
         data_timer.tic()
-        input_dict = data_loader_iter.next()
+        input_dict = next(data_loader_iter)
         data_time += data_timer.toc(average=False)
 
         # pairs consist of (xyz1 index, xyz0 index)
@@ -311,7 +311,7 @@ class ContrastiveLossTrainer(AlignmentTrainer):
 
     for batch_idx in range(tot_num_data):
       data_timer.tic()
-      input_dict = data_loader_iter.next()
+      input_dict = next(data_loader_iter)
       data_timer.toc()
 
       # pairs consist of (xyz1 index, xyz0 index)
@@ -468,7 +468,7 @@ class HardestContrastiveLossTrainer(ContrastiveLossTrainer):
       total_timer.tic()
       for iter_idx in range(iter_size):
         data_timer.tic()
-        input_dict = data_loader_iter.next()
+        input_dict = next(data_loader_iter)
         data_time += data_timer.toc(average=False)
 
         sinput0 = ME.SparseTensor(
@@ -598,7 +598,7 @@ class TripletLossTrainer(ContrastiveLossTrainer):
       total_timer.tic()
       for iter_idx in range(iter_size):
         data_timer.tic()
-        input_dict = data_loader_iter.next()
+        input_dict = next(data_loader_iter)
         data_time += data_timer.toc(average=False)
 
         # pairs consist of (xyz1 index, xyz0 index)

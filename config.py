@@ -86,7 +86,7 @@ opt_arg.add_argument('--bn_momentum', type=float, default=0.05)
 opt_arg.add_argument('--exp_gamma', type=float, default=0.99)
 opt_arg.add_argument('--scheduler', type=str, default='ExpLR')
 opt_arg.add_argument(
-    '--icp_cache_path', type=str, default="/home/chrischoy/datasets/FCGF/kitti/icp/")
+    '--icp_cache_path', type=str, default="/media/vision/Seagate/DataSets/kitti/icp/")
 
 misc_arg = add_argument_group('Misc')
 misc_arg.add_argument('--use_gpu', type=str2bool, default=True)
@@ -94,9 +94,12 @@ misc_arg.add_argument('--weights', type=str, default=None)
 misc_arg.add_argument('--weights_dir', type=str, default=None)
 misc_arg.add_argument('--resume', type=str, default=None)
 misc_arg.add_argument('--resume_dir', type=str, default=None)
-misc_arg.add_argument('--train_num_thread', type=int, default=2)
-misc_arg.add_argument('--val_num_thread', type=int, default=1)
-misc_arg.add_argument('--test_num_thread', type=int, default=2)
+misc_arg.add_argument('--train_num_thread', type=int, default=0)
+misc_arg.add_argument('--val_num_thread', type=int, default=0)
+misc_arg.add_argument('--test_num_thread', type=int, default=0)
+misc_arg.add_argument('--train_num_workers', type=int, default=0)
+misc_arg.add_argument('--val_num_workers', type=int, default=0)
+misc_arg.add_argument('--test_num_workers', type=int, default=0)
 misc_arg.add_argument('--fast_validation', type=str2bool, default=False)
 misc_arg.add_argument(
     '--nn_max_n',
@@ -109,9 +112,9 @@ data_arg = add_argument_group('Data')
 data_arg.add_argument('--dataset', type=str, default='ThreeDMatchPairDataset')
 data_arg.add_argument('--voxel_size', type=float, default=0.025)
 data_arg.add_argument(
-    '--threed_match_dir', type=str, default="/home/chrischoy/datasets/FCGF/threedmatch")
+    '--threed_match_dir', type=str, default="/media/vision/Seagate/DataSets/threedmatch")
 data_arg.add_argument(
-    '--kitti_root', type=str, default="/home/chrischoy/datasets/FCGF/kitti/")
+    '--kitti_root', type=str, default="/media/vision/Seagate/DataSets/kitti")
 data_arg.add_argument(
     '--kitti_max_time_diff',
     type=int,
